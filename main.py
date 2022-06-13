@@ -21,11 +21,25 @@ def login():
     login_screen.title("Logged as " + logged_as )
     login_screen.geometry("1500x1000")
     button_cripto = ttk.Button(login_screen, text="CRIPTOS", command=cripto)
-    button_cripto.place(x=20, y=40, width=300, height=120)
+    button_cripto.place(x=170, y=40, width=300, height=120)
+    button_cripto = ttk.Button(login_screen, text="STOKS", command=stoks)
+    button_cripto.place(x=630, y=40, width=300, height=120)
+    button_cripto = ttk.Button(login_screen, text="SAVINGS", command=savings)
+    button_cripto.place(x=1080, y=40, width=300, height=120)
     root.destroy()
+
 
 def cripto():
     return
+
+
+def stoks():
+    return
+
+
+def savings():
+    return
+
 
 def hash_password(initial_password):
     global encrypted_password
