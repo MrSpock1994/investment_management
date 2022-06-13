@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import random
 import string
+from matplotlib.pyplot import text
 import pandas as pd
 from hashlib import sha256
 
@@ -133,20 +134,25 @@ def register_one():
     register_screen = Tk()
     register_screen.title("Register new user")
     register_screen.geometry("290x310")
+    register_namelabel = ttk.Label(register_screen, text="Your Full name")
+    register_namelabel.place(x=20, y=20)
     register_name = ttk.Entry(register_screen, width=30)
-    register_name.insert(END, "Your Full Name")
     register_name.place(x=20, y=40)
+    register_usernamelabel = ttk.Label(register_screen, text="Choose a username")
+    register_usernamelabel.place(x=20, y=60)
     register_username = ttk.Entry(register_screen, width=30)
-    register_username.insert(END, "Choose a username")
     register_username.place(x=20, y=80)
+    register_emaillabel = ttk.Label(register_screen, text="Insert your email")
+    register_emaillabel.place(x=20, y=100)
     register_email = ttk.Entry(register_screen, width=30)
-    register_email.insert(END, "Insert your email")
     register_email.place(x=20, y=120)
-    register_password = ttk.Entry(register_screen, width=30)
-    register_password.insert(END, "Create a password")
+    register_passwordlabel = ttk.Label(register_screen, text="Create a password")
+    register_passwordlabel.place(x=20, y=140)
+    register_password = ttk.Entry(register_screen, show='*', width=30)
     register_password.place(x=20, y=160)
-    register_password_confirm = ttk.Entry(register_screen, width=30)
-    register_password_confirm.insert(END, "Confirm the password")
+    register_password_confirmlabel = ttk.Label(register_screen, text="Confirm the password")
+    register_password_confirmlabel.place(x=20, y=180)
+    register_password_confirm = ttk.Entry(register_screen, show='*', width=30)
     register_password_confirm.place(x=20, y=200)
     button_confirm_register = ttk.Button(register_screen, text="Confirm", command=register_two)
     button_confirm_register.place(x=100, y=240)
@@ -176,13 +182,14 @@ def register_two():
     conn.commit()
     conn.close()
 
-
+usernamelabel = ttk.Label(root, text="Username")
+usernamelabel.place(x=85, y=20)
 username = ttk.Entry(root, width=20)
-username.insert(END, "Username")
 username.place(x=40, y=40)
-password = ttk.Entry(root, width=20)
+passwordlabel = ttk.Label(root, text="Password")
+passwordlabel.place(x=85, y=60)
+password = ttk.Entry(root, show='*', width=20)
 password.place(x=40, y=80)
-password.insert(END, "Password")
 button_login = ttk.Button(root, text="Login", command=check_login)
 button_login.place(x=80, y=120)
 button_register = ttk.Button(root, text="Register", command=register_one)
