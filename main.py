@@ -1,10 +1,11 @@
 import smtplib, ssl
+import json
+import requests
 import sqlite3
 from tkinter import *
 from tkinter import ttk, messagebox
 import random
 import string
-from matplotlib.pyplot import text
 import pandas as pd
 from hashlib import sha256
 
@@ -19,26 +20,57 @@ def login():
     global logged_as 
     logged_as = username.get()
     login_screen = Tk()
-    login_screen.title("Logged as " + logged_as )
-    login_screen.geometry("1500x1000")
-    button_cripto = ttk.Button(login_screen, text="CRIPTOS", command=cripto)
-    button_cripto.place(x=170, y=40, width=300, height=120)
-    button_cripto = ttk.Button(login_screen, text="STOKS", command=stoks)
-    button_cripto.place(x=630, y=40, width=300, height=120)
+    login_screen.title("Logged as " + logged_as)
+    login_screen.geometry("1560x270")
+    button_cripto = ttk.Button(login_screen, text="CRYPTOS", command=crypto)
+    button_cripto.place(x=170, y=50, width=300, height=120)
+    button_cripto = ttk.Button(login_screen, text="STOCKS", command=stocks)
+    button_cripto.place(x=630, y=50, width=300, height=120)
     button_cripto = ttk.Button(login_screen, text="SAVINGS", command=savings)
-    button_cripto.place(x=1080, y=40, width=300, height=120)
+    button_cripto.place(x=1080, y=50, width=300, height=120)
     root.destroy()
 
 
-def cripto():
-    return
+def crypto():
+    conn = sqlite3.connect("crypto_database.db")
+    cursor = conn.cursor()
+    cripto_screen = Tk()
+    cripto_screen.title("Cripto Menu - " + logged_as)
+    cripto_screen.geometry("700x700")
+    main_coins_price = ttk.Label(cripto_screen, text="Price of main coins:")
+    main_coins_price.place(x=20, y=20)
+    bitcoin_price = ttk.Label(cripto_screen, text=get_crypto_price('BTCUSDT'))
+    bitcoin_price.place(x=20, y=40)
+    ada_price = ttk.Label(cripto_screen, text=get_crypto_price('ADAUSDT'))
+    ada_price.place(x=20, y=60)
+    solana_price = ttk.Label(cripto_screen, text=get_crypto_price('SOLUSDT'))
+    solana_price.place(x=20, y=80)
 
 
-def stoks():
+
+def get_crypto_price(coin):
+    key = "https://api.binance.com/api/v3/ticker/price?symbol="
+    url = key+coin
+    data = requests.get(url)
+    data = data.json()
+    coin_name = data['symbol']
+    coin_price = float(data['price'])
+    return f"{coin_name[:-4]} price is {coin_price} USD"
+
+
+def stocks():
+    conn = sqlite3.connect("stocks_database.db")
+    cursor = conn.cursor()
+    stock_screen = Tk()
+    stock_screen.title("Stock Menu - " + logged_as)
+    stock_screen.geometry("700x700")
     return
 
 
 def savings():
+    saving_screen = Tk()
+    saving_screen.title("Savings Menu - " + logged_as)
+    saving_screen.geometry("700x700")
     return
 
 
