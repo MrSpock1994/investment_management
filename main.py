@@ -55,6 +55,10 @@ def crypto():
     chainlink_price.place(x=20, y=170)
     uniswap_price = ttk.Label(cripto_screen, text=get_crypto_price('UNIUSDT'))
     uniswap_price.place(x=20, y=190)
+    atomo_price = ttk.Label(cripto_screen, text=get_crypto_price('ATOMUSDT'))
+    atomo_price.place(x=20, y=210)
+    sand_price = ttk.Label(cripto_screen, text=get_crypto_price('SANDUSDT'))
+    sand_price.place(x=20, y=230)
 
 
 
